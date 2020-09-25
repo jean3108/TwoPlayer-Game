@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 class StateGame(ABC):         
     """
     Class wich represent a state of a two-player game
