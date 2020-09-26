@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
+from aiAlgorithms import minmaxDecision, negamaxDecision, randomDecision, humanDecision
 
 class StateGame(ABC):         
     """
     Class wich represent a state of a two-player game
     """  
     @abstractmethod
-    def __init__(self):
+    def __init__(self, maxPlayer):
         """
         Create a state of the game.
         
@@ -13,8 +14,19 @@ class StateGame(ABC):
         :return: The state with the choosen information
         :rtype: stateGame
         """
+        self.maxPlayer = 1 if maxPlayer==True else -1
         pass
     
+    @abstractmethod
+    def isOver(self):
+        """
+        Indicate if the game is over or not
+        
+        :return: True if the game is over else False
+        :rtype: boolean
+        """
+        pass
+
     @abstractmethod
     def calculateScore(self):
         """
@@ -24,6 +36,7 @@ class StateGame(ABC):
         :rtype: number
         """
         pass
+
     
     @abstractmethod
     def getChoices(self):
@@ -74,3 +87,61 @@ class StateGame(ABC):
         :rtype: string
         """
         pass
+
+    def play(stateGame, player1, player2, verbose=True):
+        """
+        Play the game
+           
+        :param stateGame: The state to start the game
+        :param player1: String to choose the algorithm for the choice of the player1 (can be human)
+        :param player2: String to choose the algorithm for the choice of the player2 (can be human)
+            
+        :type stateGame: StateGame
+        :type player1: String
+        :type player2: String
+
+        :return: the number of the winner then 0
+        :rtype: int
+        """
+
+        ####################################
+        # Selection of algorithm & Setting #
+        ####################################
+
+        if(player1=='human'):
+            function1 = humanDecision
+        elif(player1=='minmax'):
+            function1 = minmaxDecision
+        elif(player1=='negamax'):
+            function1 = negamaxDecision
+        elif(player1=='random'):
+            function1=randomDecision
+
+        if(player2=='human'):
+            function2 = humanDecision
+        elif(player2=='minmax'):
+            function2 = minmaxDecision
+        elif(player2=='negamax'):
+            function2 = negamaxDecision
+        elif(player2=='random'):
+            function2=randomDecision
+
+        #########################
+        # Beginning of the game #
+        #########################
+
+        over = False
+        print(state.toKey())
+        print("Start")
+        while(stateGame.isOver()==False):
+            if(state.maxPlayer==1):
+                choice = function1(state)
+            else:
+                choice = function2(state)
+            state.doChoice(choice)
+            print(state.toKey())
+        print("END")
+
+        return state.calculateScore()
+        
+        

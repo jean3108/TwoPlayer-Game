@@ -2,9 +2,40 @@ import numpy as np
 
 states = {}
 
+################
+# Human Choice #
+################
+
+def humanDecision(state, verbose=False):
+    """
+    Function to make a human choice
+    
+    :param state: The state of the game on wich we want to get the best choice and score.
+    
+    :type state: StateGame
+    
+    :return: Return a 2-tuple with 0 and the choice
+    :rtype: 2-tuple(0, typeof(state.getChoices()[0]))
+    """
+
+    choices = =state.getChoices()
+    return 0, choice
+
 ##################################
 # Algorithms without memoization #
 ##################################
+def randomDecision(state):
+     """
+    Implementation of random algorithm
+    
+    :param state: The state of the game on wich we want to get the best choice and score.
+    
+    :type state: StateGame
+    
+    :return: Return a 2-tuple with the score and the best choice to make
+    :rtype: 2-tuple(typeof(state.calculScore()), typeof(state.getChoices()[0]))
+    """
+    return np.random.choice(state.getChoices())
 
 def minmaxDecisionWithoutMemoization(state):
     """
