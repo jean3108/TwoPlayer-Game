@@ -1,3 +1,7 @@
+import numpy as np
+
+states = {}
+
 ##################################
 # Algorithms without memoization #
 ##################################
