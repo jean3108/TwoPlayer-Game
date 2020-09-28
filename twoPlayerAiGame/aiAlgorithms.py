@@ -18,7 +18,11 @@ def humanDecision(state, verbose=False):
     :rtype: 2-tuple(0, typeof(state.getChoices()[0]))
     """
 
-    choices = =state.getChoices()
+    choices = state.getChoices()
+    print("Voici les choix possibles :")
+    for i in len(choices):
+        print(i+1,". ",choices[i])
+    choice = choices[int(input())+1]
     return 0, choice
 
 ##################################

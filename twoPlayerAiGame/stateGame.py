@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from aiAlgorithms import minmaxDecision, negamaxDecision, randomDecision, humanDecision
+from twoPlayerAiGame.aiAlgorithms import minmaxDecision, negamaxDecision, randomDecision, humanDecision
 
 class StateGame(ABC):         
     """
@@ -88,17 +88,17 @@ class StateGame(ABC):
         """
         pass
 
-    def play(stateGame, player1, player2, verbose=True):
+    def play(self, player1, player2, verbose=True):
         """
         Play the game
            
-        :param stateGame: The state to start the game
         :param player1: String to choose the algorithm for the choice of the player1 (can be human)
         :param player2: String to choose the algorithm for the choice of the player2 (can be human)
+        :param verbose: Indicate if information are printed or not
             
-        :type stateGame: StateGame
         :type player1: String
         :type player2: String
+        :type verbose: boolean
 
         :return: the number of the winner then 0
         :rtype: int
@@ -115,7 +115,7 @@ class StateGame(ABC):
         elif(player1=='negamax'):
             function1 = negamaxDecision
         elif(player1=='random'):
-            function1=randomDecision
+            function1 = randomDecision
 
         if(player2=='human'):
             function2 = humanDecision
@@ -124,24 +124,24 @@ class StateGame(ABC):
         elif(player2=='negamax'):
             function2 = negamaxDecision
         elif(player2=='random'):
-            function2=randomDecision
+            function2 = randomDecision
 
         #########################
         # Beginning of the game #
         #########################
 
         over = False
-        print(state.toKey())
+        print(self.toKey())
         print("Start")
         while(stateGame.isOver()==False):
-            if(state.maxPlayer==1):
-                choice = function1(state)
+            if(self.maxPlayer==1):
+                choice = function1(self)
             else:
-                choice = function2(state)
-            state.doChoice(choice)
-            print(state.toKey())
+                choice = function2(self)
+            self.doChoice(choice)
+            print(self.toKey())
         print("END")
 
-        return state.calculateScore()
+        return self.calculateScore()
         
         
