@@ -133,7 +133,7 @@ class StateGame(ABC):
         over = False
         print(self.toKey())
         print("Start")
-        while(stateGame.isOver()==False):
+        while(self.isOver()==False):
             if(self.maxPlayer==1):
                 choice = function1(self)
             else:
