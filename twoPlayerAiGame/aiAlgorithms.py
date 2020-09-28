@@ -29,7 +29,7 @@ def humanDecision(state, verbose=False):
 # Algorithms without memoization #
 ##################################
 def randomDecision(state):
-     """
+    """
     Implementation of random algorithm
     
     :param state: The state of the game on wich we want to get the best choice and score.
