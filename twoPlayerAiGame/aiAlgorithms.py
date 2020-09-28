@@ -19,10 +19,7 @@ def humanDecision(state, verbose=False):
     """
 
     choices = state.getChoices()
-    print("Voici les choix possibles :")
-    for i in len(choices):
-        print(i+1,". ",choices[i])
-    choice = choices[int(input())+1]
+    choice = choices[int(input())-1]
     return 0, choice
 
 ##################################
@@ -39,7 +36,7 @@ def randomDecision(state):
     :return: Return a 2-tuple with the score and the best choice to make
     :rtype: 2-tuple(typeof(state.calculScore()), typeof(state.getChoices()[0]))
     """
-    return np.random.choice(state.getChoices())
+    return 0, np.random.choice(state.getChoices())
 
 def minmaxDecisionWithoutMemoization(state):
     """

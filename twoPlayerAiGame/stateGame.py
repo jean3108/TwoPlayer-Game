@@ -88,6 +88,39 @@ class StateGame(ABC):
         """
         pass
 
+    
+    @abstractmethod
+    def printBeforeGame(self):
+        """
+        Print information before the beginning of the game
+        """
+        pass
+    
+    @abstractmethod
+    def printInfoPlayer(self):
+        """
+        Print information before the turn of the current player
+        """
+        pass
+    
+    @abstractmethod
+    def printResultAction(self, choice):
+        """
+        Print information after the turn of the current player
+        
+        :param choice: The choice wich was just played
+            
+        :type choice: typeof(self.getChoices()[0])
+        """
+        pass
+    
+    @abstractmethod
+    def printAfterGame(self):
+        """
+        Print information after the end of the game
+        """
+        pass
+    
     def play(self, player1, player2, verbose=True):
         """
         Play the game
@@ -131,16 +164,20 @@ class StateGame(ABC):
         #########################
 
         over = False
-        print(self.toKey())
-        print("Start")
+        if(verbose==True):
+            self.printBeforeGame()
         while(self.isOver()==False):
+            if(verbose==True):
+                self.printInfoPlayer()
             if(self.maxPlayer==1):
-                choice = function1(self)
+                choice = function1(self)[1]
             else:
-                choice = function2(self)
+                choice = function2(self)[1]
             self.doChoice(choice)
-            print(self.toKey())
-        print("END")
+            if(verbose==True):
+                self.printResultAction(choice)
+        if(verbose==True):
+            self.printAfterGame()
 
         return self.calculateScore()
         
