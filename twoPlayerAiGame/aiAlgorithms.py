@@ -51,12 +51,13 @@ def minmaxDecisionWithoutMemoization(state):
     """
     
     score = state.calculateScore()
-    
+    choices = state.getChoices()
+
     # Terminal Node
     if(type(score) is bool and score == False):
-        return score, None
+        return score, choices[0]
     
-    choices = state.getChoices()
+    
     
     #MAX player
     if(state.maxPlayer == 1): 
@@ -97,14 +98,14 @@ def negamaxDecisionWithoutMemoization(state):
     :rtype: 2-tuple(typeof(state.calculScore()), typeof(state.getChoices()[0]))
     """
     score = state.calculateScore()
-    
+    choices = state.getChoices()
+
     # Terminal Node
     if(type(score) is bool and score == False):
-        return score*state.maxPlayer, None
+        return score*state.maxPlayer, choices[0]
     
     score = -np.inf
     bestChoice = None
-    choices = state.getChoices()
     for choice in choices:
         state.doChoice(choice)
         newScore, newChoice = negamaxDecision(state)
@@ -140,13 +141,14 @@ def minmaxDecision(state):
         return states[key]
     
     score = state.calculateScore()
-    
+    choices = state.getChoices()
+
     # Terminal Node
     if(type(score) is bool and score == False):
-        states[key] = score, None #Save values
+        states[key] = score, choices[0] #Save values
         return states[key]
     
-    choices = state.getChoices()
+    
     
     #MAX player
     if(state.maxPlayer == 1):
@@ -195,15 +197,15 @@ def negamaxDecision(state):
         return states[key]
     
     score = state.calculateScore()
+    choices = state.getChoices()
     
     # Terminal Node
     if(type(score) is bool and score == False):
-        states[key] = score*state.maxPlayer, None #Save values
+        states[key] = score*state.maxPlayer, choices[0] #Save values
         return states[key] 
     
     score = -np.inf
     bestChoice = None
-    choices = state.getChoices()
     for choice in choices:
         state.doChoice(choice)
         newScore, newChoice = negamaxDecision(state)
