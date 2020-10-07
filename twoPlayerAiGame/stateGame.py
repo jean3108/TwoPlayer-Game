@@ -17,15 +17,6 @@ class StateGame(ABC):
         self.maxPlayer = 1 if maxPlayer==True else -1
         pass
     
-    @abstractmethod
-    def isOver(self):
-        """
-        Indicate if the game is over or not
-        
-        :return: True if the game is over else False
-        :rtype: boolean
-        """
-        pass
 
     @abstractmethod
     def calculateScore(self):
@@ -166,7 +157,9 @@ class StateGame(ABC):
         over = False
         if(verbose==True):
             self.printBeforeGame()
-        while(self.isOver()==False):
+
+        currentScore = self.calculateScore()
+        while(currentScore==False):
             if(verbose==True):
                 self.printInfoPlayer()
             if(self.maxPlayer==1):
@@ -174,11 +167,12 @@ class StateGame(ABC):
             else:
                 choice = function2(self)[1]
             self.doChoice(choice)
+            currentScore = self.calculateScore()
             if(verbose==True):
                 self.printResultAction(choice)
         if(verbose==True):
             self.printAfterGame()
 
-        return self.calculateScore()
+        return currentScore
         
         

@@ -53,7 +53,7 @@ def minmaxDecisionWithoutMemoization(state):
     score = state.calculateScore()
     
     # Terminal Node
-    if(score != 0):
+    if(type(score) is bool and score == False):
         return score, None
     
     choices = state.getChoices()
@@ -99,7 +99,7 @@ def negamaxDecisionWithoutMemoization(state):
     score = state.calculateScore()
     
     # Terminal Node
-    if(score != 0):
+    if(type(score) is bool and score == False):
         return score*state.maxPlayer, None
     
     score = -np.inf
@@ -142,7 +142,7 @@ def minmaxDecision(state):
     score = state.calculateScore()
     
     # Terminal Node
-    if(score != 0):
+    if(type(score) is bool and score == False):
         states[key] = score, None #Save values
         return states[key]
     
@@ -197,7 +197,7 @@ def negamaxDecision(state):
     score = state.calculateScore()
     
     # Terminal Node
-    if(score != 0):
+    if(type(score) is bool and score == False):
         states[key] = score*state.maxPlayer, None #Save values
         return states[key] 
     
